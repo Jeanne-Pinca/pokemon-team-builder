@@ -1,0 +1,92 @@
+/* General container */
+.app-container {
+  padding: 20px;
+}
+
+/* Team Grid */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.team-slot {
+  border: 2px dashed #aaa;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  min-height: 120px;
+  transition: background 0.2s ease;
+}
+
+.team-slot.filled {
+  background: #f1f1f1;
+  cursor: pointer;
+}
+
+.team-slot.empty {
+  background: #fff;
+  cursor: default;
+}
+
+.empty-text {
+  color: #aaa;
+}
+
+.remove-text {
+  color: red;
+  font-size: 0.8rem;
+}
+
+/* Pokédex Grid */
+.pokedex-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.pokemon-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  background: #f9f9f9;
+}
+
+.pokemon-card img {
+  display: block;
+  margin: 0 auto 8px;
+}
+
+/* Buttons */
+.add-btn {
+  margin-top: 8px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-btn:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.add-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Search */
+.search-container {
+  margin-bottom: 12px;
+}
+
+.search-status {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 6px;
+}
