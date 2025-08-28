@@ -1,23 +1,24 @@
-//contexts/TeamContext.jsx
-import { createContext, useContext, useState, useEffect } from "react";
+// src/contexts/TeamContext.jsx
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const TeamContext = createContext();
 
 export function TeamProvider({ children }) {
   const [team, setTeam] = useState(() => {
-    const saved = localStorage.getItem("pokemon-team");
+    // Load from localStorage on initial render
+    const saved = localStorage.getItem("pokemonTeam");
     return saved ? JSON.parse(saved) : [];
   });
 
-  // persist to localStorage
+  // Save to localStorage whenever team changes
   useEffect(() => {
-    localStorage.setItem("pokemon-team", JSON.stringify(team));
+    localStorage.setItem("pokemonTeam", JSON.stringify(team));
   }, [team]);
 
   const addToTeam = (pokemon) => {
-    if (team.length >= 6) return;
-    if (team.find((p) => p.id === pokemon.id)) return;
-    setTeam([...team, pokemon]);
+    if (team.length < 6 && !team.some((p) => p.id === pokemon.id)) {
+      setTeam([...team, pokemon]);
+    }
   };
 
   const removeFromTeam = (id) => {
@@ -31,4 +32,6 @@ export function TeamProvider({ children }) {
   );
 }
 
-export const useTeam = () => useContext(TeamContext);
+export function useTeam() {
+  return useContext(TeamContext);
+}

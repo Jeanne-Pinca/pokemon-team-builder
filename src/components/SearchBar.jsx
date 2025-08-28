@@ -1,29 +1,14 @@
-import { useState } from "react";
+// src/components/SearchBar.jsx
+import React from "react";
 
-function SearchBar({ onSearch }) {
-  const [query, setQuery] = useState("");
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setQuery(value);
-    onSearch(value.toLowerCase());
-  };
-
+export default function SearchBar({ value, onChange }) {
   return (
     <input
       type="text"
-      value={query}
-      placeholder="Search by name or type..."
-      onChange={handleChange}
-      style={{
-        padding: "10px",
-        borderRadius: "8px",
-        border: "1px solid #ccc",
-        width: "100%",
-        marginBottom: "20px",
-      }}
+      placeholder="Search Pokémon..."
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="search-bar"
     />
   );
 }
-
-export default SearchBar;

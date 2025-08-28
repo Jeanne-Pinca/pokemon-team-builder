@@ -1,0 +1,25 @@
+.search-rules {
+  margin: 1rem auto;
+  padding: 1rem;
+  max-width: 600px;
+  background: #f8f8f8;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+}
+
+.search-rules h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.search-rules ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.search-rules li {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #555;
+}
