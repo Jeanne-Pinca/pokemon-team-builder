@@ -1,4 +1,3 @@
-// fetches the cards from useFetch using the API
 // src/components/Pokedex.jsx
 import React, { useState, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
@@ -39,17 +38,19 @@ export default function Pokedex() {
   if (error) return <p>Error loading Pokédex: {error}</p>;
   if (!pokemonList.length) return <p>Loading Pokémon details...</p>;
 
-  // --- Search Logic ---
-  const normalizedSearch = search.toLowerCase().trim();
-  const filtered = pokemonList.filter((pokemon) => {
+  // --- Helper function for search logic ---
+  function matchesSearch(pokemon, searchQuery) {
+    const normalized = searchQuery.toLowerCase().trim();
+    if (!normalized) return true; // show all if empty search
+
     // Case 1: "type only"
-    if (normalizedSearch.endsWith(" only")) {
-      const type = normalizedSearch.replace(" only", "").trim();
+    if (normalized.endsWith(" only")) {
+      const type = normalized.replace(" only", "").trim();
       return pokemon.types.length === 1 && pokemon.types[0] === type;
     }
 
     // Case 2: multi-type search (comma or space separated)
-    const searchParts = normalizedSearch.split(/[\s,]+/).filter(Boolean);
+    const searchParts = normalized.split(/[\s,]+/).filter(Boolean);
     if (searchParts.length > 1) {
       // must match *all* search terms as types
       return searchParts.every((term) => pokemon.types.includes(term));
@@ -57,12 +58,12 @@ export default function Pokedex() {
 
     // Case 3: regular search (name or type match)
     return (
-      pokemon.name.toLowerCase().includes(normalizedSearch) ||
-      pokemon.types.some((type) =>
-        type.toLowerCase().includes(normalizedSearch)
-      )
+      pokemon.name.toLowerCase().includes(normalized) ||
+      pokemon.types.some((type) => type.toLowerCase().includes(normalized))
     );
-  });
+  }
+
+  const filtered = pokemonList.filter((p) => matchesSearch(p, search));
 
   return (
     <div className="pokedex">
@@ -71,7 +72,7 @@ export default function Pokedex() {
 
       <div className="pokedex-grid">
         {filtered.map((pokemon) => {
-          const inTeam = team.some((p) => p.id === String(pokemon.id));
+          const inTeam = team.some((p) => p.id === pokemon.id); // keep ID as number
 
           return (
             <div key={pokemon.id} className="pokedex-card">
@@ -95,8 +96,8 @@ export default function Pokedex() {
 
               {/* Add button */}
               <button
-                onClick={() =>
-                  addToTeam({ id: String(pokemon.id), name: pokemon.name })
+                onClick={
+                  () => addToTeam({ id: pokemon.id, name: pokemon.name, types: pokemon.types,}) 
                 }
                 disabled={inTeam || team.length >= 6}
                 className={
