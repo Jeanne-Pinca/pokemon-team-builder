@@ -1,9 +1,7 @@
 /* src/App.css */
-
-
 @font-face {
-  font-family: 'Ketchum';
-  src: url('./fonts/Ketchum.otf') format('opentype');
+  font-family: "Ketchum";
+  src: url("./fonts/Ketchum.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -12,7 +10,7 @@ h1 {
   font-size: 2.5rem;
   color: #d62828;
   text-align: center;
-  font-family: 'Ketchum', sans-serif; 
+  font-family: "Ketchum", sans-serif;
   font-style: normal;
 }
 
@@ -20,27 +18,25 @@ h2 {
   font-size: 1.8rem;
   color: #457b9d;
   margin-top: 1.5rem;
-  font-family: 'Ketchum', sans-serif; 
+  font-family: "Ketchum", sans-serif;
   text-align: center;
 }
 
 /* Pokédex Container */
-
 .team-container {
-  max-width: 100%; /* for example */
-  margin: 0 auto;    /* center horizontally */
+  max-width: 100%; 
+  margin: 0 auto; 
   background-color: #f5f5f5;
   border-radius: 12px;
   padding-bottom: 20px;
   padding-top: 20px;
 }
 
-
 /* --- Shared card sizing --- */
 .pokedex-card,
 .team-slot {
-  width: 100%;           
-  height: 100%px;           
+  width: 100%;
+  height: 100%px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -84,8 +80,36 @@ h2 {
   transition: background 0.2s ease;
 }
 
-.pokedex-card button:disabled {
-  background: #aaa;
+/* General button base */
+.btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* Default Add button */
+.btn.add-team {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn.add-team:hover {
+  background-color: #78acff;
+}
+
+/* In Team button */
+.btn.in-team {
+  background-color: #59cf59;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* Team Full button */
+.btn.team-full {
+  background-color: #9e9e9e;
+  color: #f5f5f5;
   cursor: not-allowed;
 }
 
@@ -105,25 +129,63 @@ h2 {
   text-transform: capitalize;
 }
 
-/* You can customize colors per type */
-.type-fire { background: #f08030; }
-.type-water { background: #6890f0; }
-.type-grass { background: #78c850; }
-.type-electric { background: #f8d030; color: black; }
-.type-ice { background: #98d8d8; }
-.type-fighting { background: #c03028; }
-.type-poison { background: #a040a0; }
-.type-ground { background: #e0c068; color: black; }
-.type-flying { background: #a890f0; }
-.type-psychic { background: #f85888; }
-.type-bug { background: #a8b820; }
-.type-rock { background: #b8a038; }
-.type-ghost { background: #705898; }
-.type-dragon { background: #7038f8; }
-.type-dark { background: #705848; }
-.type-steel { background: #b8b8d0; }
-.type-fairy { background: #ee99ac; }
-.type-normal { background: #a8a878; }
+/* customizing colors per type*/
+.type-fire {
+  background: #f08030;
+}
+.type-water {
+  background: #6890f0;
+}
+.type-grass {
+  background: #78c850;
+}
+.type-electric {
+  background: #f8d030;
+  color: black;
+}
+.type-ice {
+  background: #98d8d8;
+}
+.type-fighting {
+  background: #c03028;
+}
+.type-poison {
+  background: #a040a0;
+}
+.type-ground {
+  background: #e0c068;
+  color: black;
+}
+.type-flying {
+  background: #a890f0;
+}
+.type-psychic {
+  background: #f85888;
+}
+.type-bug {
+  background: #a8b820;
+}
+.type-rock {
+  background: #b8a038;
+}
+.type-ghost {
+  background: #705898;
+}
+.type-dragon {
+  background: #7038f8;
+}
+.type-dark {
+  background: #705848;
+}
+.type-steel {
+  background: #b8b8d0;
+}
+.type-fairy {
+  background: #ee99ac;
+}
+.type-normal {
+  background: #a8a878;
+}
 
 .pokemon-name {
   font-size: 1rem;
@@ -133,7 +195,6 @@ h2 {
   color: #333;
   text-align: center;
 }
-
 
 /* --- Team Grid --- */
 .team-grid {
@@ -145,8 +206,8 @@ h2 {
 }
 
 .team-slot {
-  width: 150px;           /* match your grid column width */
-  height: 200px;          /* pick a consistent height */
+  width: 150px; /* match your grid column width */
+  height: 200px; /* pick a consistent height */
   border: 2px dashed #aaa;
   background: #fff;
   text-align: center;
@@ -157,7 +218,6 @@ h2 {
   align-items: center;
   justify-content: center;
 }
-
 
 .team-slot.filled {
   background: #f1f1f1;

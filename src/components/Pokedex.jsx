@@ -7,7 +7,9 @@ import SearchBar from "./SearchBar";
 
 export default function Pokedex() {
   const { addToTeam, team } = useTeam();
-  const { data, loading, error } = useFetch("https://pokeapi.co/api/v2/pokemon?limit=151");
+  const { data, loading, error } = useFetch(
+    "https://pokeapi.co/api/v2/pokemon?limit=151"
+  );
   const [search, setSearch] = useState("");
   const [pokemonList, setPokemonList] = useState([]);
 
@@ -46,8 +48,8 @@ export default function Pokedex() {
       return pokemon.types.length === 1 && pokemon.types[0] === type;
     }
 
-    // Case 2: multi-type search e.g. "poison flying"
-    const searchParts = normalizedSearch.split(/\s+/); // split by spaces
+    // Case 2: multi-type search (comma or space separated)
+    const searchParts = normalizedSearch.split(/[\s,]+/).filter(Boolean);
     if (searchParts.length > 1) {
       // must match *all* search terms as types
       return searchParts.every((term) => pokemon.types.includes(term));
@@ -56,13 +58,14 @@ export default function Pokedex() {
     // Case 3: regular search (name or type match)
     return (
       pokemon.name.toLowerCase().includes(normalizedSearch) ||
-      pokemon.types.some((type) => type.toLowerCase().includes(normalizedSearch))
+      pokemon.types.some((type) =>
+        type.toLowerCase().includes(normalizedSearch)
+      )
     );
   });
 
   return (
     <div className="pokedex">
-
       {/* Search bar component */}
       <SearchBar value={search} onChange={setSearch} />
 
@@ -92,10 +95,23 @@ export default function Pokedex() {
 
               {/* Add button */}
               <button
-                onClick={() => addToTeam({ id: String(pokemon.id), name: pokemon.name })}
+                onClick={() =>
+                  addToTeam({ id: String(pokemon.id), name: pokemon.name })
+                }
                 disabled={inTeam || team.length >= 6}
+                className={
+                  inTeam
+                    ? "btn in-team"
+                    : team.length >= 6
+                    ? "btn team-full"
+                    : "btn add-team"
+                }
               >
-                {inTeam ? "In Team" : "Add to Team"}
+                {inTeam
+                  ? "In Team"
+                  : team.length >= 6
+                  ? "Team Full"
+                  : "Add to Team"}
               </button>
             </div>
           );

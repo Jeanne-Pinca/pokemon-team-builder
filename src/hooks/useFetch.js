@@ -7,7 +7,7 @@ const useFetch = (url) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let isMounted = true; // avoid setting state on unmounted component
+    let isMounted = true; 
 
     const fetchData = async () => {
       try {

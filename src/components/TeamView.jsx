@@ -17,7 +17,7 @@ export default function TeamView() {
                 alt={pokemon.name}
                 className="team-img"
               />
-              <p className="capitalize">{pokemon.name}</p>
+              <p className="pokemon-name">{pokemon.name}</p>
 
               <button
                 className="remove-btn"

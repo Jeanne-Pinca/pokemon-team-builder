@@ -10,15 +10,11 @@ export default function App() {
   return (
     <TeamProvider>
       <div className="app">
-        
         <h1>Pokémon Team Builder</h1>
         <TeamView />
-
         <h2>Pokédex</h2>
         <SearchRules /> 
-        
         <Pokedex />
-        
       </div>
     </TeamProvider>
   );
