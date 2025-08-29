@@ -12,13 +12,27 @@ export default function TeamView() {
         {slots.map((pokemon, i) =>
           pokemon ? (
             <div key={pokemon.id} className="team-slot filled">
+             
+              {/* Pokémon types */}
+              <div className="types">
+                {pokemon.types?.map((type) => (
+                  <span key={type} className={`type-badge type-${type}`}>
+                    {type}
+                  </span>
+                ))}
+              </div>
+
+              {/* Pokémon sprite */}
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
                 alt={pokemon.name}
                 className="team-img"
               />
+
+              {/* Pokémon name */}
               <p className="pokemon-name">{pokemon.name}</p>
 
+              {/* Remove button */}
               <button
                 className="remove-btn"
                 onClick={() => removeFromTeam(pokemon.id)}
